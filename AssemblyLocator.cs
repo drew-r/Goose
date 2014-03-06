@@ -12,14 +12,21 @@ namespace Goose
         static Dictionary<string, Assembly> _assemblies = new Dictionary<string, Assembly>();
 
         static bool _init = false;
-        public static void Initialize()
+        internal static void Initialize()
         {
             if (_init) return;
             _init = true;
             AppDomain.CurrentDomain.AssemblyLoad += new AssemblyLoadEventHandler(CurrentDomain_AssemblyLoad);
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);            
         }
-        
+
+        /// <summary>
+        /// Resolve a reference to a CLR dependency. Seeks matching assemblies in the file system and the GAC. 
+        /// </summary>
+        /// <param name="reference">The reference.</param>
+        /// <param name="relativeTo">The optional relative path from which the locator should seek the assembly.</param>
+        /// <returns></returns>
+        /// <exception cref="System.IO.FileNotFoundException">Could not resolve reference  + reference + (relativeTo != null ?  relative to  + relativeTo : ) + .</exception>
         public static string ResolveReference(string reference, string relativeTo = null)
         {
             string gacPath;
@@ -52,7 +59,7 @@ namespace Goose
             }
         }
 
-        public static Assembly ResolveAssembly(string identifier, bool tryLoad = false)
+        internal static Assembly ResolveAssembly(string identifier, bool tryLoad = false)
         {
             Assembly assembly = null;
             if (_assemblies.TryGetValue(identifier, out assembly)) { return assembly; }
