@@ -51,11 +51,17 @@
     <Compile Include="AssemblyLocator.cs" />
     <Compile Include="CSharpCompiler.cs" />
     <Compile Include="GACAPI.cs" />
+    <Compile Include="Util.cs" />
     <Compile Include="VM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="lib\CLRPackage.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lib\Goose.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
