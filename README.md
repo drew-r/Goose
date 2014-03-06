@@ -33,7 +33,9 @@ Like this :)
             string whatsUp = motherGoose.WhatsUpMotherGoose();
             Console.WriteLine(whatsUp);
 
-            LuaFunction func = vm.DoString("return function(whatsUp) Console.WriteLine(whatsUp) end")[0] as LuaFunction;
+            LuaFunction func = vm.DoString("return function(whatsUp) Console.WriteLine(whatsUp) end")[0] 
+                        as LuaFunction;
+                        
             func.Call(whatsUp);
 ```
 
