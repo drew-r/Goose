@@ -59,7 +59,7 @@ namespace Goose
             }
         }
 
-        internal static Assembly ResolveAssembly(string identifier, bool tryLoad = false)
+        public static Assembly ResolveAssembly(string identifier, bool tryLoad = false)
         {
             Assembly assembly = null;
             if (_assemblies.TryGetValue(identifier, out assembly)) { return assembly; }
