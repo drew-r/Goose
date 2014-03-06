@@ -30,7 +30,7 @@ namespace Goose  //because Maverick depends on Goose...
 
 
         /// <summary>
-        /// Imports all namespaces within the specified assembly.
+        /// Imports the specified assembly and all namespaces within.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         public void Import(Assembly assembly)
@@ -40,8 +40,10 @@ namespace Goose  //because Maverick depends on Goose...
             {
                 DoString(String.Format("import('{0}','{1}')", assemblyNamespace.Assembly, assemblyNamespace.Namespace));
             }
-
+           
         }
+
+       
 
 
         /// <summary>
