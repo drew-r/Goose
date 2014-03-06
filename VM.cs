@@ -9,18 +9,30 @@ using System.Threading.Tasks;
 
 namespace Goose  //because Maverick depends on Goose...
 {
+    /// <summary>
+    /// Interface to the Goose Lua VM & C# Compiler
+    /// </summary>
     public class VM : Lua
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VM"/> class.
+        /// </summary>
         public VM() : base()
         {
             AssemblyLocator.Initialize();
             DoString("require \"lib/CLRPackage\"");
+            DoString("require \"lib/Goose\"");
             Import(Assembly.GetAssembly(this.GetType()));
             Import(AssemblyLocator.ResolveAssembly(AssemblyLocator.ResolveReference("mscorlib"), true));
             Import(AssemblyLocator.ResolveAssembly(AssemblyLocator.ResolveReference("System"),true));
         }
 
 
+
+        /// <summary>
+        /// Imports all namespaces within the specified assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
         public void Import(Assembly assembly)
         {
             var assemblyNamespaces = (from type in assembly.GetExportedTypes() select new { Namespace = type.Namespace, Assembly = assembly.FullName }).Distinct();
@@ -32,6 +44,13 @@ namespace Goose  //because Maverick depends on Goose...
         }
 
 
+        /// <summary>
+        /// Compile and import an assembly. Referenced assemblies will also be imported.
+        /// </summary>
+        /// <param name="assemblyName">Name the assembly.</param>
+        /// <param name="src">The source - a mix of directory paths, file paths and plain C#.</param>
+        /// <param name="references">Any CLR references.</param>
+        /// <returns>The compiled assembly.</returns>
         public Assembly Compile(string assemblyName,string[] src, params string[] references)
         {
             List<string> source = new List<string>(src);
