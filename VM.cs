@@ -20,8 +20,8 @@ namespace Goose  //because Maverick depends on Goose...
         public VM() : base()
         {
             AssemblyLocator.Initialize();
-            DoString("require \"lib/CLRPackage\"");
-            DoString("require \"lib/Goose\"");
+            DoString(Goose.Properties.Resources.CLRPackage);
+            DoString(Goose.Properties.Resources.Util);
             Import(Assembly.GetAssembly(this.GetType()));
             Import(AssemblyLocator.ResolveAssembly(AssemblyLocator.ResolveReference("mscorlib"), true));
             Import(AssemblyLocator.ResolveAssembly(AssemblyLocator.ResolveReference("System"),true));
@@ -85,11 +85,7 @@ namespace Goose  //because Maverick depends on Goose...
                 Import(AssemblyLocator.ResolveAssembly(reference,true));
             }
             return assembly;
-        }
-
-
-
-
+        }             
 
     }
 }
