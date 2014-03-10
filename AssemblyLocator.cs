@@ -37,9 +37,9 @@ namespace Goose
             {
                 string refExt = refExts[i];
                 resolvedPath =
-                    File.Exists(relativeTo + reference + refExt) ? relativeTo + reference + refExt :
-                    File.Exists(AppDomain.CurrentDomain.BaseDirectory + reference + refExt) ? AppDomain.CurrentDomain.BaseDirectory + reference + refExt : 
-                    File.Exists((gacPath = queryGAC(Path.GetFileNameWithoutExtension(reference + refExt)))) ? gacPath :
+                    File.Exists(String.Concat(relativeTo,reference,refExt)) ? String.Concat(relativeTo,reference,refExt) :
+                    File.Exists(String.Concat(AppDomain.CurrentDomain.BaseDirectory,reference,refExt)) ? String.Concat(AppDomain.CurrentDomain.BaseDirectory,reference,refExt) : 
+                    File.Exists((gacPath = queryGAC(String.Concat(reference,refExt)))) ? gacPath :
                     null;
             }
 
