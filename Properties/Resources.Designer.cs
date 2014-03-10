@@ -86,11 +86,11 @@ namespace Goose.Properties {
         ///if arg.n&gt;0 then arg.n = nil table.insert(arg,1,t) t = arg 
         ///elseif type(t) ~= &quot;table&quot; and type(t) ~= &quot;userdata&quot; then t = {t}
         ///end
-        ///return Utility.ObjArrayFromTable(t)
+        ///return Util.ObjArrayFromTable(t)
         ///end
         ///
         ///function obj(t)
-        ///return Utility.ObjFromTable(t)
+        ///return Util.ObjFromTable(t)
         ///end
         ///
         ///function str_arr(t,...)
@@ -98,7 +98,7 @@ namespace Goose.Properties {
         ///if arg.n&gt;0 then arg.n = nil table.insert(arg,1,t) t = arg 
         ///elseif type(t) ~= &quot;table&quot; and type(t) ~= &quot;userdata&quot; then t = {t}
         ///end
-        ///return Utility.StringArrayFromTable(t)
+        ///return Util.StringArrayFromTable(t)
         ///end.
         /// </summary>
         internal static string Util {

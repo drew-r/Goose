@@ -232,11 +232,11 @@ arg = table.pack(...)
 if arg.n&gt;0 then arg.n = nil table.insert(arg,1,t) t = arg 
 elseif type(t) ~= "table" and type(t) ~= "userdata" then t = {t}
 end
-return Utility.ObjArrayFromTable(t)
+return Util.ObjArrayFromTable(t)
 end
 
 function obj(t)
-return Utility.ObjFromTable(t)
+return Util.ObjFromTable(t)
 end
 
 function str_arr(t,...)
@@ -244,7 +244,7 @@ arg = table.pack(...)
 if arg.n&gt;0 then arg.n = nil table.insert(arg,1,t) t = arg 
 elseif type(t) ~= "table" and type(t) ~= "userdata" then t = {t}
 end
-return Utility.StringArrayFromTable(t)
+return Util.StringArrayFromTable(t)
 end</value>
   </data>
 </root>
