@@ -50,10 +50,13 @@
 
 <p>This comes built on top of NLua's already excellent functionality (quite literally, the Goose VM inherits directly from NLua's), including automatic conversion between Lua and CLR primitives, Lua functions and CLR delegates (great for event handlers and callbacks) and Lua tables and CLR interfaces (dynamically implement a CLR interface with Lua) as well as support for invoking overloaded CLR methods etc.</p>
 
-<p>In the interests of learning by example...</p>
+<h3>
+<a name="by-example" class="anchor" href="#by-example"><span class="octicon octicon-link"></span></a>By example...</h3>
 
 <h4>
 <a name="compile-a-class" class="anchor" href="#compile-a-class"><span class="octicon octicon-link"></span></a>Compile a class</h4>
+
+<p><em>from string(s), file paths, directory paths or a combination of the above.</em></p>
 
 <div class="highlight highlight-csharp"><pre>
 <span class="n">VM</span> <span class="n">vm</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Goose</span><span class="p">.</span><span class="n">VM</span><span class="p">();</span>
@@ -65,17 +68,33 @@
 <span class="s">{</span>
 <span class="s">   public class HelloWorld </span>
 <span class="s">   {</span>
-<span class="s">      public HelloWorld() </span>
-<span class="s">      {</span>
-<span class="s">          MessageBox.Show(""Hello, World"");        </span>
-<span class="s">      }  </span>
+<span class="s">      public void SayHello()</span>
+<span class="s">      { </span>
+<span class="s">         MessageBox.Show(""Hello, World""); </span>
+<span class="s">      }</span>
 <span class="s">   }</span>
 <span class="s">}</span>
 <span class="s">"</span><span class="p">},</span><span class="s">"System.Windows.Forms"</span><span class="p">);</span>
 
-<span class="n">vm</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">"HelloWorld()"</span><span class="p">);</span>
+</pre></div>
+
+<h4>
+<a name="create-an-instance-and-invoke-a-method-from-lua" class="anchor" href="#create-an-instance-and-invoke-a-method-from-lua"><span class="octicon octicon-link"></span></a>Create an instance and invoke a method from Lua</h4>
+
+<div class="highlight highlight-csharp"><pre>
+<span class="n">vm</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">"h = HelloWorld()"</span><span class="p">);</span>
+<span class="n">vm</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">"h:SayHello()"</span><span class="p">);</span>
 
 </pre></div>
+
+<h4>
+<a name="or-return-the-instance-to-the-clr-and-invoke-it-from-there" class="anchor" href="#or-return-the-instance-to-the-clr-and-invoke-it-from-there"><span class="octicon octicon-link"></span></a>or return the instance to the CLR and invoke it from there</h4>
+
+<pre><code>
+dynamic h = vm.DoString("return h")[0];
+h.SayHello();
+
+</code></pre>
       </section>
 
     </div>
