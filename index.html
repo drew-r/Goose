@@ -41,10 +41,10 @@
         <h1>
 <a name="here-lives" class="anchor" href="#here-lives"><span class="octicon octicon-link"></span></a>Here lives...</h1>
 
-<p>...the documentation for Goose, a project that combines runtime C# compilation with Lua scripting (NLua). </p>
+<p>...the documentation for Goose, a project that combines runtime C# compilation with Lua scripting (<a href="nlua.org">NLua</a>). </p>
 
-<h3>
-<a name="what-does-it-do" class="anchor" href="#what-does-it-do"><span class="octicon octicon-link"></span></a>What does it do?</h3>
+<h2>
+<a name="what-does-it-do" class="anchor" href="#what-does-it-do"><span class="octicon octicon-link"></span></a>What does it do?</h2>
 
 <p>Goose allows you to make use of C# classes &amp; objects compiled at runtime, without invoking a single reflection method. This provides workable C# scripting, on the condition that you are happy to glue scripted C# components into the CLR with Lua.</p>
 
@@ -90,11 +90,95 @@
 <h4>
 <a name="or-return-the-instance-to-the-clr-and-invoke-it-from-there" class="anchor" href="#or-return-the-instance-to-the-clr-and-invoke-it-from-there"><span class="octicon octicon-link"></span></a>or return the instance to the CLR and invoke it from there</h4>
 
-<pre><code>
-dynamic h = vm.DoString("return h")[0];
-h.SayHello();
+<div class="highlight highlight-csharp"><pre>
+<span class="kt">dynamic</span> <span class="n">h</span> <span class="p">=</span> <span class="n">vm</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">"return h"</span><span class="p">)[</span><span class="m">0</span><span class="p">];</span>
+<span class="n">h</span><span class="p">.</span><span class="n">SayHello</span><span class="p">();</span>
 
-</code></pre>
+</pre></div>
+
+<h2>
+<a name="reference" class="anchor" href="#reference"><span class="octicon octicon-link"></span></a>Reference</h2>
+
+<h3>
+<a name="vm--nlualua" class="anchor" href="#vm--nlualua"><span class="octicon octicon-link"></span></a>VM <em>: NLua.Lua</em>
+</h3>
+
+<h4>
+<a name="import" class="anchor" href="#import"><span class="octicon octicon-link"></span></a>Import</h4>
+
+<p>Imports an Assembly making it available at the Lua VM.</p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">void</span> <span class="nf">Import</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span> <span class="n">assembly</span><span class="p">)</span>
+</pre></div>
+
+<p><code>assembly</code>
+The System.Reflection.Assembly to be imported.</p>
+
+<h4>
+<a name="compile" class="anchor" href="#compile"><span class="octicon octicon-link"></span></a>Compile</h4>
+
+<p>Compiles an assembly from source. </p>
+
+<div class="highlight highlight-csharp"><pre><span class="n">System</span><span class="p">.</span><span class="n">Reflection</span><span class="p">.</span><span class="n">Assembly</span> <span class="n">Compile</span><span class="p">(</span><span class="kt">string</span> <span class="n">assemblyName</span><span class="p">,</span> 
+                    <span class="kt">string</span><span class="p">[]</span> <span class="n">src</span><span class="p">,</span>
+                    <span class="k">params</span> <span class="kt">string</span><span class="p">[]</span> <span class="n">references</span><span class="p">)</span>
+</pre></div>
+
+<p><code>assemblyName</code>
+The name of the assembly to be built. If generating in memory is disabled, this serves as the output path for the assembly and so full file paths are acceptable. </p>
+
+<p><code>src</code>
+The code base. Raw C#, the path to a C# source file, or the path to a directory containing C# source files are all acceptable inputs per element.</p>
+
+<p><code>references</code>
+An array of identifiers referencing dependency assemblies. The identifiers will be resolved against the file system and GAC.</p>
+
+<h3>
+<a name="util" class="anchor" href="#util"><span class="octicon octicon-link"></span></a>Util</h3>
+
+<h4>
+<a name="objarrayfromtable" class="anchor" href="#objarrayfromtable"><span class="octicon octicon-link"></span></a>ObjArrayFromTable</h4>
+
+<p><em>Lua Global arr(t)</em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">static</span> <span class="kt">object</span><span class="p">[]</span> <span class="nf">ObjArrayFromTable</span><span class="p">(</span><span class="n">LuaTable</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+
+<p>Transforms a <code>LuaTable</code> into an array of objects (child Lua Tables are converted via <code>ObjFromTable</code>). </p>
+
+<h4>
+<a name="stringarrayfromtable" class="anchor" href="#stringarrayfromtable"><span class="octicon octicon-link"></span></a>StringArrayFromTable</h4>
+
+<p><em>Lua Global str_arr(t)</em></p>
+
+<div class="highlight highlight-csharp"><pre><span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">StringArrayFromTable</span><span class="p">(</span><span class="n">LuaTable</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+
+<p>Transforms a <code>LuaTable</code> into an array of strings (as IEnumerable).</p>
+
+<h4>
+<a name="objfromtableluatable-t" class="anchor" href="#objfromtableluatable-t"><span class="octicon octicon-link"></span></a>ObjFromTable(<code>LuaTable</code> t)</h4>
+
+<div class="highlight highlight-csharp"><pre><span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">StringArrayFromTable</span><span class="p">(</span><span class="n">LuaTable</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+
+<p>Transforms a <code>LuaTable</code> into a CLR object (<code>Dictionary&lt;string, object&gt;</code>) that is easily indexable via <code>dynamic</code>. 
+Useful when passing <code>LuaTable</code>s back to the CLR. Will return an array via <code>ObjArrayFromTable</code> if it is found that the table argument is in fact a Lua array. Child tables will be converted to objects via this method recursively.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<h3>
+<a name="the-mit-license-mit" class="anchor" href="#the-mit-license-mit"><span class="octicon octicon-link"></span></a>The MIT License (MIT)</h3>
+
+<h4>
+<a name="copyright-c-2014-drew-r" class="anchor" href="#copyright-c-2014-drew-r"><span class="octicon octicon-link"></span></a>Copyright (c) 2014 Drew R</h4>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
       </section>
 
     </div>
