@@ -1,4 +1,5 @@
 ﻿using Goose;
+using NLua;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +24,30 @@ namespace GooseInYourFaceWhatchaGonnaDo
             {
                 Console.WriteLine(""Moo!"");
             }
+            
+            public string WhatsUpMotherGoose()
+            {                                   
+                return ""Space and stuff"";
+            }
         }    
 }" 
             });
 
-            vm.DoString("MotherGoose()");
+            vm.DoString("m = MotherGoose()");
+            Console.WriteLine(vm.DoString("return m:WhatsUpMotherGoose()")[0]);
+
+
+
+            
+            dynamic motherGoose = vm.DoString("return m")[0];
+            string whatsUp = motherGoose.WhatsUpMotherGoose();
+            Console.WriteLine(whatsUp);
+
+            LuaFunction func = vm.DoString("return function(whatsUp) Console.WriteLine(whatsUp) end")[0] as LuaFunction;
+            func.Call(whatsUp);
+
+            vm.DoString("HelloWorld()");
+
 
             Console.ReadLine();
             
