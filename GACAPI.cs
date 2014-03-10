@@ -146,13 +146,13 @@ using System.Text;
                     IntPtr pvReserced);
         }// IInstallReferenceEnum
 
-        public enum AssemblyCommitFlags
+        internal enum AssemblyCommitFlags
         {
             Default = 1,
             Force = 2
         }// enum AssemblyCommitFlags
 
-        public enum AssemblyCacheUninstallDisposition
+        internal enum AssemblyCacheUninstallDisposition
         {
             Unknown = 0,
             Uninstalled = 1,
@@ -193,7 +193,7 @@ using System.Text;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public class InstallReference
+        internal class InstallReference
         {
             public InstallReference(Guid guid, String id, String data)
             {
@@ -242,7 +242,7 @@ using System.Text;
         }
 
         [ComVisible(false)]
-        public class InstallReferenceGuid
+        internal class InstallReferenceGuid
         {
             public static bool IsValidGuidScheme(Guid guid)
             {
@@ -261,7 +261,7 @@ using System.Text;
         }
 
         [ComVisible(false)]
-        public static class AssemblyCache
+        internal static class AssemblyCache
         {
             public static void InstallAssembly(String assemblyPath, InstallReference reference, AssemblyCommitFlags flags)
             {
@@ -346,7 +346,7 @@ using System.Text;
         }
 
         [ComVisible(false)]
-        public class AssemblyCacheEnum
+        internal class AssemblyCacheEnum
         {
             // null means enumerate all the assemblies
             public AssemblyCacheEnum(String assemblyName)
@@ -426,7 +426,7 @@ using System.Text;
             private bool done;
         }// class AssemblyCacheEnum
 
-        public class AssemblyCacheInstallReferenceEnum
+        internal class AssemblyCacheInstallReferenceEnum
         {
             public AssemblyCacheInstallReferenceEnum(String assemblyName)
             {
