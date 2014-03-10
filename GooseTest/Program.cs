@@ -46,7 +46,7 @@ namespace GooseInYourFaceWhatchaGonnaDo
             LuaFunction func = vm.DoString("return function(whatsUp) Console.WriteLine(whatsUp) end")[0] as LuaFunction;
             func.Call(whatsUp);
 
-            vm.DoString("HelloWorld()");
+        
 
 
             Console.ReadLine();
