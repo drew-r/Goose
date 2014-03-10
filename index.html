@@ -1,36 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Goose : Runtime C# compilation and integrated Lua scripting for fun and profit." />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Goose by drew-r</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Goose</title>
   </head>
-
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/drew-r/Goose">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/drew-r/Goose/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/drew-r/Goose/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/drew-r/Goose">View on GitHub</a>
+    <div class="wrapper">
 
-          <h1 id="project_title">Goose</h1>
-          <h2 id="project_tagline">Runtime C# compilation and integrated Lua scripting for fun and profit.</h2>
+      <section>
+        <div id="title">
+          <h1>Goose</h1>
+          <p>Runtime C# compilation and integrated Lua scripting for fun and profit.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/drew-r">drew-r</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/drew-r/Goose/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/drew-r/Goose/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
         <h1>
 <a name="here-lives" class="anchor" href="#here-lives"><span class="octicon octicon-link"></span></a>Here lives...</h1>
 
@@ -43,13 +50,18 @@
 
 <p>This comes built on top of NLua's already excellent functionality (quite literally, the Goose VM inherits directly from NLua's), including automatic conversion between Lua and CLR primitives, Lua functions and CLR delegates (great for event handlers and callbacks) and Lua tables and CLR interfaces (dynamically implement a CLR interface with Lua) as well as support for invoking overloaded CLR methods etc.</p>
 
+<p>In the interests of learning by example...</p>
+
+<h4>
+<a name="compile-a-class" class="anchor" href="#compile-a-class"><span class="octicon octicon-link"></span></a>Compile a class</h4>
+
 <div class="highlight highlight-csharp"><pre>
 <span class="n">VM</span> <span class="n">vm</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Goose</span><span class="p">.</span><span class="n">VM</span><span class="p">();</span>
 
-<span class="n">vm</span><span class="p">.</span><span class="n">Compile</span><span class="p">(</span><span class="s">@"</span>
+<span class="n">vm</span><span class="p">.</span><span class="n">Compile</span><span class="p">(</span><span class="s">"HelloWorldAssembly"</span><span class="p">,</span> <span class="k">new</span> <span class="kt">string</span><span class="p">[]</span> <span class="p">{</span> <span class="s">@"</span>
 <span class="s">using System; </span>
 <span class="s">using System.Windows.Forms;</span>
-<span class="s">namespace GooseDemo </span>
+<span class="s">namespace HelloWorldNamespace </span>
 <span class="s">{</span>
 <span class="s">   public class HelloWorld </span>
 <span class="s">   {</span>
@@ -57,24 +69,17 @@
 <span class="s">      {</span>
 <span class="s">          MessageBox.Show(""Hello, World"");        </span>
 <span class="s">      }  </span>
+<span class="s">   }</span>
 <span class="s">}</span>
-<span class="s">"</span><span class="p">);</span>
+<span class="s">"</span><span class="p">},</span><span class="s">"System.Windows.Forms"</span><span class="p">);</span>
 
 <span class="n">vm</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">"HelloWorld()"</span><span class="p">);</span>
 
 </pre></div>
       </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Goose maintained by <a href="https://github.com/drew-r">drew-r</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
     </div>
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
-
   </body>
 </html>
