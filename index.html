@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Goose : Runtime C# compilation and integrated Lua scripting for fun and profit." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Goose</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/drew-r/Goose">View on GitHub</a>
+
+          <h1 id="project_title">Goose</h1>
+          <h2 id="project_tagline">Runtime C# compilation and integrated Lua scripting for fun and profit.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/drew-r/Goose/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/drew-r/Goose/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="here-lives" class="anchor" href="#here-lives"><span class="octicon octicon-link"></span></a>Here lives...</h1>
+
+<p>...the documentation for Goose, a project that combines runtime C# compilation with Lua scripting (NLua). </p>
+
+<h3>
+<a name="what-does-it-do" class="anchor" href="#what-does-it-do"><span class="octicon octicon-link"></span></a>What does it do?</h3>
+
+<p>Goose allows you to make use of C# classes &amp; objects compiled at runtime, without invoking a single reflection method. This provides workable C# scripting, on the condition that you are happy to glue scripted C# components into the CLR with Lua.</p>
+
+<p>This comes built on top of NLua's already excellent functionality (quite literally, the Goose VM inherits directly from NLua's), including automatic conversion between Lua and CLR primitives, Lua functions and CLR delegates (great for event handlers and callbacks) and Lua tables and CLR interfaces (dynamically implement a CLR interface with Lua) as well as support for invoking overloaded CLR methods etc.</p>
+
+<div class="highlight highlight-csharp"><pre>
+<span class="n">VM</span> <span class="n">vm</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Goose</span><span class="p">.</span><span class="n">VM</span><span class="p">();</span>
+
+<span class="n">vm</span><span class="p">.</span><span class="n">Compile</span><span class="p">(</span><span class="s">@"</span>
+<span class="s">using System; </span>
+<span class="s">using System.Windows.Forms;</span>
+<span class="s">namespace GooseDemo </span>
+<span class="s">{</span>
+<span class="s">   public class HelloWorld </span>
+<span class="s">   {</span>
+<span class="s">      public HelloWorld() </span>
+<span class="s">      {</span>
+<span class="s">          MessageBox.Show(""Hello, World"");        </span>
+<span class="s">      }  </span>
+<span class="s">}</span>
+<span class="s">"</span><span class="p">);</span>
+
+<span class="n">vm</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">"HelloWorld()"</span><span class="p">);</span>
+
+</pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Goose maintained by <a href="https://github.com/drew-r">drew-r</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
