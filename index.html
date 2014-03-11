@@ -97,15 +97,15 @@
 </pre></div>
 
 <h4>
-<a name="easily-index-a-lua-table-passed-into-the-clr" class="anchor" href="#easily-index-a-lua-table-passed-into-the-clr"><span class="octicon octicon-link"></span></a>Easily index a Lua table passed into the CLR</h4>
+<a name="easily-convert-a-lua-table-to-a-poco-eg-for-serialization-by-jsonnet-" class="anchor" href="#easily-convert-a-lua-table-to-a-poco-eg-for-serialization-by-jsonnet-"><span class="octicon octicon-link"></span></a>Easily convert a Lua table to a POCO (e.g for serialization by <a href="json.net">JSON.NET</a> :)</h4>
 
 <div class="highlight highlight-csharp"><pre>
 <span class="kt">dynamic</span> <span class="n">t</span> <span class="p">=</span> <span class="n">vm</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">@"</span>
 <span class="s">    return obj({ Forename=""Fred"", Surname=""Flintstone"" })</span>
 <span class="s">"</span><span class="p">)[</span><span class="m">0</span><span class="p">];</span>
 
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">Forename</span><span class="p">);</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">Surname</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s">"Forename"</span><span class="p">]);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s">"Surname"</span><span class="p">]);</span>
 
 
 </pre></div>
@@ -176,7 +176,7 @@ An array of identifiers referencing dependency assemblies. The identifiers will 
 <div class="highlight highlight-csharp"><pre><span class="k">static</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">StringArrayFromTable</span><span class="p">(</span><span class="n">LuaTable</span> <span class="n">t</span><span class="p">)</span>
 </pre></div>
 
-<p>Transforms a <code>LuaTable</code> into a CLR object (<code>Dictionary&lt;string, object&gt;</code>) that is easily indexable via <code>dynamic</code>. 
+<p>Transforms a <code>LuaTable</code> into a CLR object (<code>Dictionary&lt;string, object&gt;</code>) that is easily indexable. 
 Useful when passing <code>LuaTable</code>s back to the CLR. Will return an array via <code>ObjArrayFromTable</code> if it is found that the table argument is in fact a Lua array. Child tables will be converted to objects via this method recursively.</p>
 
 <h2>
