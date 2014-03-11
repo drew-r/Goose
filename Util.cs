@@ -34,12 +34,13 @@ namespace Goose
         {
             Dictionary<string, object> args = new Dictionary<string, object>();
 
-            foreach (DictionaryEntry item in t)
+            foreach (object key in t.Keys)
             {
+                object value = t[key];
                 object obj;
-                if (item.Key is double) { return ObjArrayFromTable(t); }
-                if (item.Value is LuaTable) { obj = ObjFromTable((LuaTable)item.Value); } else { obj = item.Value; }
-                args.Add(item.Key.ToString(), obj);
+                if (key is double) { return ObjArrayFromTable(t); }
+                if (value is LuaTable) { obj = ObjFromTable((LuaTable)value); } else { obj = value; }
+                args.Add(key.ToString(), obj);
             }
             return args;
         }
