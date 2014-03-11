@@ -96,6 +96,20 @@
 
 </pre></div>
 
+<h4>
+<a name="easily-index-a-lua-table-passed-into-the-clr" class="anchor" href="#easily-index-a-lua-table-passed-into-the-clr"><span class="octicon octicon-link"></span></a>Easily index a Lua table passed into the CLR</h4>
+
+<div class="highlight highlight-csharp"><pre>
+<span class="kt">dynamic</span> <span class="n">t</span> <span class="p">=</span> <span class="n">vm</span><span class="p">.</span><span class="n">DoString</span><span class="p">(</span><span class="s">@"</span>
+<span class="s">    return obj({ Forename=""Fred"", Surname=""Flintstone"" })</span>
+<span class="s">"</span><span class="p">)[</span><span class="m">0</span><span class="p">];</span>
+
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">Forename</span><span class="p">);</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">Surname</span><span class="p">);</span>
+
+
+</pre></div>
+
 <h2>
 <a name="reference" class="anchor" href="#reference"><span class="octicon octicon-link"></span></a>Reference</h2>
 
