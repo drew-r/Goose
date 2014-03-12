@@ -37,7 +37,8 @@ namespace Goose
                 string msg = "";
                 foreach (CompilerError err in results.Errors)
                 {
-                    msg = String.Concat(msg, err.ErrorNumber + ": " + err.ErrorText + " @ " + err.FileName + " L" + err.Line + " C" + err.Column);
+                    msg = String.Concat(msg, err.ErrorNumber, ": ", err.ErrorText," @ ", 
+                    err.FileName , " L" , err.Line , " C" , err.Column);
                 }
                 throw new Exception("Compilation error(s)..." + msg);
             }
