@@ -14,36 +14,40 @@ Create a Goose VM, then use it to compile a C# class from source and create an i
 VM vm = new VM();
 
 //Compile some C# classes
-vm.Compile("GooseFeatures", new string[]{
+vm.Compile("MyAwesomeAssembly", new string[]{
 @"
 using System;
-namespace GooseInYourFaceWhatchaGonnaDo 
+namespace MyAwesomeNamespace 
 {
-    public class MotherGoose 
+    public class Pigeon
     { 
-        public MotherGoose()
+        public Pigeon()
         {
             Console.WriteLine(""Moo!"");
+        }
+        public string Wassup()
+        {
+            return "I am the pigeon to end all pigeons.";
         }
     }    
 }" 
         });
 
-//Create an instance of our new class with Lua
-vm.DoString("m = MotherGoose()");
+//Create an instance of our new class with Lua and assign it to a Lua global
+vm.DoString("p = Pigeon()");
 ```
 
 Invoke a method on the instance and obtain the result.
 
 ```csharp
-Console.WriteLine(vm.DoString("return m:WhatsUpMotherGoose()")[0]);
+Console.WriteLine(vm.DoString("return p:Wassup()")[0]);
 ```
 
 .NET 4's _dynamic_ type means you can pull a scripted object straight into the CLR and start working with it.
 
 ```csharp
-dynamic motherGoose = vm.DoString("return m")[0];
-string whatsUp = motherGoose.WhatsUpMotherGoose();
+dynamic pigeon = vm.DoString("return p")[0];
+string whatsUp = pigeon.Wassup();
 Console.WriteLine(whatsUp);
 ```
 
