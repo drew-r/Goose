@@ -3,7 +3,7 @@ Goose
 - Provides an integrated Lua scripting environment to .NET applications via NLua (http://nlua.org). 
 - Facilitates runtime C# code compilation into this environment for scripting. 
 - Free and open source (MIT license).
-- See http://goose.drewr.co.uk
+- **For more documentation see http://goose.drewr.co.uk**
 
 Getting started...
 ---
