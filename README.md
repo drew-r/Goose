@@ -27,7 +27,7 @@ namespace MyAwesomeNamespace
         }
         public string Wassup()
         {
-            return "I am the pigeon to end all pigeons.";
+            return ""I am the pigeon to end all pigeons."";
         }
     }    
 }" 
